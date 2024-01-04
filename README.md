@@ -20,5 +20,6 @@ Para ejecutar el servidor de desarrollo con hot module replacement, en otra term
 sail npm run dev
 ```
 
-
+En este proyecto se ocupa el helper now, para consultar por mas helpers podemos revisar el siguiente enlace:
+[https://laravel.com/docs/10.x/helpers](https://laravel.com/docs/10.x/helpers)
 
