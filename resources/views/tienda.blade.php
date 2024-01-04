@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('titulo')
-  Nosotros
+  Tienda virtual
 @endsection()
 
 @section('contenido')
-  Contenido de nosotros
+  Contenido de la tienda
 @endsection

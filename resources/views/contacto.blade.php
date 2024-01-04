@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('titulo')
-  Nosotros
+  Contacto
 @endsection()
 
 @section('contenido')
-  Contenido de nosotros
+  Contenido de contacto
 @endsection
