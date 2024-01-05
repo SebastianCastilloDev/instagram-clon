@@ -73,3 +73,24 @@ Los controllers ayudan a tener codigo mejor organizado, ademas de una separació
 laravel cuenta con un robusto sistema de validaciones para los datos que se ingresan en formularios.
 
 [https://laravel.com/docs/10.x/validation](https://laravel.com/docs/10.x/validation)
+
+nosotros podemos poner nuestros mensajes de validacion en blade de la siguiente forma:
+
+```php
+@error('name')
+    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+        {{ $message }}
+    </p>
+@enderror
+```
+
+pero esto nos entregará el mensaje en inglés. Existen repositorios en github que tienen traducciones para estas validaciones. Uno de ellos es el siguiente repositorio.
+
+https://github.com/MarcoGomesr/laravel-validation-en-espanol
+
+Clonamos el repositorio con la siguiente instruccion:
+
+```git clone https://github.com/MarcoGomesr/laravel-validation-en-espanol.git resources/lang```
+
+Abrimos el archivo ```/config/app.php``` y reemplazamos el valor de la variable locale por es.
+
