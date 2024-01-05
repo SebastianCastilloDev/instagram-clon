@@ -67,3 +67,9 @@ En laravel existen convenciones para nombrar estos métodos. En este sentido, si
 Los controllers ayudan a tener codigo mejor organizado, ademas de una separación de las responsabilidades de cada funcionalidad.
 
 [https://laravel.com/docs/10.x/controllers](https://laravel.com/docs/10.x/controllers)
+
+### Validaciones en Laravel
+
+laravel cuenta con un robusto sistema de validaciones para los datos que se ingresan en formularios.
+
+[https://laravel.com/docs/10.x/validation](https://laravel.com/docs/10.x/validation)
