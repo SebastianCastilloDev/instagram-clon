@@ -94,3 +94,61 @@ Clonamos el repositorio con la siguiente instruccion:
 
 Abrimos el archivo ```/config/app.php``` y reemplazamos el valor de la variable locale por es.
 
+En nuestro formulario de registro, pondremos el atributo `novalidate``, para que la validación se realice en el servidor
+
+```html
+<form action="{{ route('register') }}" method="POST" novalidate>
+```
+
+finalmente aun no podemos utilizar este formulario ya que la migración encargada de crear estas tabla aun no se ha ejecutado y no podrá, por ejemplo, validar el email.
+
+### Migraciones
+
+Son el "control de versiones" de la bbdd, podemos crear el diseño de la bbdd y compartirlo con nuestro equipo de trabajo
+
+Las migraciones se pueden revertir, la documentacion de laravel nos da más detalles acerca de las migraciones
+
+https://laravel.com/docs/10.x/migrations#main-content
+
+El comando mas común, que nos permite correr nuestras migraciones es:
+`sail artisan migrate`
+
+Para eliminar la ultima migracion:
+`sail artisan migrate:rollback`
+
+Para eliminar las ultimas 5 migraciones:
+`sail artisan migrate:rollback --step=5`
+
+**Para nuestro código lo haremos así:**
+
+Para ejecutar nuestras migraciones en la raiz del proyecto
+`sail artisan migrate`
+
+Para verificar el estado de la base de datos, podemos ejecutar
+`sail mysql -u` 
+e ingresar a la línea de comandos de MySQL.
+```
+show databases;
+use <nombrebbdd>;
+show tables;
+describe users;
+```
+lo cual muestra el siguiente resultado:
+```
++-------------------+-----------------+------+-----+---------+----------------+
+| Field             | Type            | Null | Key | Default | Extra          |
++-------------------+-----------------+------+-----+---------+----------------+
+| id                | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| name              | varchar(255)    | NO   |     | NULL    |                |
+| email             | varchar(255)    | NO   | UNI | NULL    |                |
+| email_verified_at | timestamp       | YES  |     | NULL    |                |
+| password          | varchar(255)    | NO   |     | NULL    |                |
+| remember_token    | varchar(100)    | YES  |     | NULL    |                |
+| created_at        | timestamp       | YES  |     | NULL    |                |
+| updated_at        | timestamp       | YES  |     | NULL    |                |
++-------------------+-----------------+------+-----+---------+----------------+
+```
+
+
+
+
