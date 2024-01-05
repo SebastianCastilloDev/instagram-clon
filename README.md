@@ -61,5 +61,9 @@ class RegisterController extends Controller
     }
 }
 ```
-
+### Controllers en laravel
 En laravel existen convenciones para nombrar estos métodos. En este sentido, si un método en un controlador muestra una vista entonces este método se debe llamar **index**. 
+
+Los controllers ayudan a tener codigo mejor organizado, ademas de una separación de las responsabilidades de cada funcionalidad.
+
+[https://laravel.com/docs/10.x/controllers](https://laravel.com/docs/10.x/controllers)
