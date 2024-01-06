@@ -306,3 +306,57 @@ mysql> select * from users;
 
 En el cual podemos apreciar que todo sigue funcionando correctamente.
 Nota: Laravel a esta altura ya valida si una cuenta de correo ya ha sido utilizada.
+
+## Helpers en Laravel
+
+https://laravel.com/docs/10.x/helpers
+
+Existe una gran cantidad de helpers que podemos utilizar.
+Por ejemplo:
+
+```php
+Str::lower(valor)
+```
+
+En nuestro caso si ingresamos un username con espacios, en la url nos va a dar problemas, para ello podemos utilizar slug. Slug convierte un valor string a un formato url, eliminando los tildes y reemplazando los espacios con guión medio.
+
+```php
+Str::slug('Sábana blanca') // => sabana-blanca
+```
+
+### Evitando usernames duplicados
+
+para que la validación acerca de usernames duplicados se lleve a cabo, vamos a realizar las siguientes modificaciones:
+
+Agregamos el método unique a nuestra migración.
+```php
+public function up(): void
+{
+    Schema::table('users', function (Blueprint $table) {
+        $table->string('username')->unique();
+    });
+}
+```
+
+Aplicamos el rollback:
+
+`sail artisan migrate:rollback --step=1`
+
+Finalmente volvemos a ejecutar la migración:
+
+`sail artisan migrate`
+
+Finalmente el controlador nos queda de la siguiente forma:
+
+```php
+User::create([
+    'name'=>$request->name,
+    'username'=>Str::slug($request->username),
+    'email'=>$request->email,
+    'password'=>Hash::make($request->password)
+]);
+```
+
+**Nota1: De esta forma conseguimos obtener usernames únicos**
+
+**Nota2: En Laravel 10 no es necesario modificar el request, en versiones anteriores si, pero es una práctica que se debe evitar.**
