@@ -21,7 +21,7 @@
                     <a class="font-bold text-gray-600 text-sm" href="#">
                         Hola: <span class="font-normal">{{ auth()->user()->username }}</span>
                     </a>
-                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Cerrar Sesión</a>
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('logout') }}">Cerrar Sesión</a>
                 </nav>
             @endauth
 
