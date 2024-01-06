@@ -11,13 +11,14 @@ class LoginController extends Controller
     }
 
     public function store(Request $request){
+
         $this->validate($request, [
             'email'=> 'required|email',
             'password' => 'required'
         ]);
 
         //En caso de que el usuario no se pueda autenticar
-        if(!auth()->attempt($request->only('email', 'password'))){
+        if(!auth()->attempt($request->only('email', 'password'), $request->remember)){
             return back()->with('mensaje', 'Credenciales incorrectas');
         }
 
