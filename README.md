@@ -364,3 +364,5 @@ User::create([
 ## Redireccionar
 
         return redirect()->route('post.index');
+
+## Autenticacion

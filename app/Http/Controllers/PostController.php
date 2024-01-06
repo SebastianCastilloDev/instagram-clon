@@ -8,6 +8,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        dd(1);
+        dd(auth()->user());
     }
 }
+
+session_start();
