@@ -32,5 +32,7 @@ class RegisterController extends Controller
             
         ]);
 
+        return redirect()->route('post.index');
+
     }
 }

@@ -360,3 +360,7 @@ User::create([
 **Nota1: De esta forma conseguimos obtener usernames únicos**
 
 **Nota2: En Laravel 10 no es necesario modificar el request, en versiones anteriores si, pero es una práctica que se debe evitar.**
+
+## Redireccionar
+
+        return redirect()->route('post.index');
