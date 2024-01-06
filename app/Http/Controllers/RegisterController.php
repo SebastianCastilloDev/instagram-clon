@@ -29,7 +29,6 @@ class RegisterController extends Controller
             'username'=>Str::slug($request->username),
             'email'=>$request->email,
             'password'=>Hash::make($request->password)
-            
         ]);
 
         //Autenticar un usuario
