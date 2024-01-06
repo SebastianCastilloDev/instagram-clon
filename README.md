@@ -100,6 +100,22 @@ En nuestro formulario de registro, pondremos el atributo `novalidate``, para que
 <form action="{{ route('register') }}" method="POST" novalidate>
 ```
 
+La validación finalmente queda de este modo:
+```php
+public function store(Request $request)
+    {
+        //Validation
+        $this->validate($request,[
+            'name'=>'required|max:30',
+            'username'=> 'required|unique:users|min:3|max:20',
+            'email'=>'required|unique:users|email|max:60',
+            'password'=>'required|confirmed|min:6',
+        ]);
+    }
+```
+
+Para que el campo password confirme que ambos password son iguales, laravel nos da una convención que es la de utilizar el name="password_confirmation" en blade. La palabra clave es confirmation.
+
 finalmente aun no podemos utilizar este formulario ya que la migración encargada de crear estas tabla aun no se ha ejecutado y no podrá, por ejemplo, validar el email.
 
 ### Migraciones
@@ -149,6 +165,66 @@ lo cual muestra el siguiente resultado:
 +-------------------+-----------------+------+-----+---------+----------------+
 ```
 
+Si observamos la tabla no contamos con un campo username, por lo cual al enviar el formulario Laravel nos lanzará un error.
 
+Para ello debemos correr la siguiente migración:
 
+`sail artisan make:migration add_username_to_users_table`
 
+**NOTA:** Laravel tiene muchas convenciones en inglés respecto de los nombres que utilizamos en nuestras operaciones por consola. 
+
+Este comando nos creará un archivo en la carpeta `database/migrations` con la siguiente estructura: (Notemos como el archivo apunta hacia la tabla 'users')
+
+```php
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
+    }
+};
+```
+
+Cuando ejecutamos un rollback se ejecuta down(). Por lo tanto si agregamos campos, en up(), debemos eliminarlos en el down.
+El archivo de la nueva migración entonces tiene este aspecto:
+
+```php
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('username');
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('username');
+        });
+    }
+};
+```
+
+Finalmente ejecutamos: `sail artisan migrate`
