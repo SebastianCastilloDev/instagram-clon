@@ -62,9 +62,10 @@ class RegisterController extends Controller
 }
 ```
 ### Controllers en laravel
-En laravel existen convenciones para nombrar estos métodos. En este sentido, si un método en un controlador muestra una vista entonces este método se debe llamar **index**. 
-
 Los controllers ayudan a tener codigo mejor organizado, ademas de una separación de las responsabilidades de cada funcionalidad.
+
+En laravel existen convenciones para nombrar los métodos de un clase controller. En este sentido, si un método en un controlador muestra una vista entonces este método se debe llamar **index**. 
+
 
 [https://laravel.com/docs/10.x/controllers](https://laravel.com/docs/10.x/controllers)
 
@@ -228,3 +229,80 @@ El archivo de la nueva migración entonces tiene este aspecto:
 ```
 
 Finalmente ejecutamos: `sail artisan migrate`
+
+## Eloquent ORM
+
+Laravel incluye un ORM llamado Eloquent.
+
+https://laravel.com/docs/10.x/eloquent
+
+En Eloquent, cada tabla tiene su propio modelo, ese modelo interactúa unicamente con esa tabla y permite el CRUD.
+
+Para crear un modelo utilizaremos
+
+`sail artisan make:model <nombre>`
+
+Respecto de las convenciones si creamos el modelo Cliente, Eloquent asume que la tabla se va a llamar clientes. 
+
+
+### Inserción de registros en Eloquent.
+
+Para nuestro caso, ya contamos con un modelo llamado User.php
+Utilizaremos el método create para insertar un registro dentro de la tabla users(recordar las convenciones). Este método corresponde a la instruccion `INSERT INTO ...`
+
+```php
+User::create([
+    'name'=>$request->name,
+    'username'=>$request->username,
+    'email'=>$request->email,
+    'password'=>$request->password,
+]);
+```
+
+El id no es necesario agregarlo ya que tiene un AUTO_INCREMENT.
+
+Si intentamos guardar los registros, Laravel, nos dará un error, para ello debemos ir a nuestro modelo User.php y agregar el campo `username` manualmente, ya que en la migración original de users, este campo no estaba incluído, por lo tanto la modificación que se debe hacer es la siguiente:
+
+En el campo $fillable 
+
+```php
+protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'username' // Se debe agregar este campo
+    ];
+```
+
+Al realizar nuestra consulta en la bbdd, vemos el siguiente resultado:
+
+```
+mysql> select * from users;
++----+-----------+-------------------+-------------------+--------------------------------------------------------------+----------------+---------------------+---------------------+-----------+
+| id | name      | email             | email_verified_at | password                                                     | remember_token | created_at          | updated_at          | username  |
++----+-----------+-------------------+-------------------+--------------------------------------------------------------+----------------+---------------------+---------------------+-----------+
+|  1 | Sebastian | correo@correo.com | NULL              | $2y$12$9CF3r/e5lVT09ukP9RJQj.9qRzvjE2.dB5k2kS6Py1FF.f8FM45re | NULL           | 2024-01-06 01:39:23 | 2024-01-06 01:39:23 | Sebastian |
++----+-----------+-------------------+-------------------+--------------------------------------------------------------+----------------+---------------------+---------------------+-----------+
+```
+
+Notemos que el password ya esta hasheado.
+
+De todas formas este password es posible hashearlo explicitamente, agregando el método make de la clase Hash de la siguiente forma:
+```php
+    'password'=>Hash::make($request->password)
+```
+
+Al consultar nuevamente la tabla users obtenemos el siguiente resultado:
+
+```
+mysql> select * from users;
++----+------------+--------------------+-------------------+--------------------------------------------------------------+----------------+---------------------+---------------------+------------+
+| id | name       | email              | email_verified_at | password                                                     | remember_token | created_at          | updated_at          | username   |
++----+------------+--------------------+-------------------+--------------------------------------------------------------+----------------+---------------------+---------------------+------------+
+|  1 | Sebastian  | correo@correo.com  | NULL              | $2y$12$9CF3r/e5lVT09ukP9RJQj.9qRzvjE2.dB5k2kS6Py1FF.f8FM45re | NULL           | 2024-01-06 01:39:23 | 2024-01-06 01:39:23 | Sebastian  |
+|  2 | Sebastian2 | correo2@correo.com | NULL              | $2y$12$EVUD4ctGeS8QNCypQXfjJepDiBfgE0iJDWTbpi1uKaM/7EN4mMt56 | NULL           | 2024-01-06 01:56:50 | 2024-01-06 01:56:50 | Sebastian2 |
++----+------------+--------------------+-------------------+--------------------------------------------------------------+----------------+---------------------+---------------------+------------+
+```
+
+En el cual podemos apreciar que todo sigue funcionando correctamente.
+Nota: Laravel a esta altura ya valida si una cuenta de correo ya ha sido utilizada.
