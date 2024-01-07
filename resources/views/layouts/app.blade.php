@@ -19,7 +19,7 @@
             @auth
                 <nav class="flex gap-4 items-center">
                     <a class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold uppercase"
-                        href={{ route('post.create') }}>
+                        href={{ route('posts.create') }}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -30,7 +30,7 @@
 
                         Crear
                     </a>
-                    <a class="font-bold text-gray-600 text-sm" href="#">
+                    <a class="font-bold text-gray-600 text-sm" href="{{ route('posts.index', auth()->user()->username) }}">
                         Hola: <span class="font-normal">{{ auth()->user()->username }}</span>
                     </a>
                     <form method="POST" action={{ route('logout') }}>
