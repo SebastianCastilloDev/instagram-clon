@@ -366,3 +366,11 @@ User::create([
         return redirect()->route('post.index');
 
 ## Autenticacion
+
+Revisar la documentacion de auth en laravel
+
+## Subida de imágenes
+
+Crearemos un controlador dedicado a manejar la ruta de subida de imágenes
+
+sail artisan make:controller ImagenController
