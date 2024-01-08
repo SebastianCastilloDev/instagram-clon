@@ -385,3 +385,15 @@ Estos eventos se llaman:
 * removedfile
 
 El evento de success nos va a retornar la respuesta de ImagenController.php
+
+### Utilizando intervention image
+
+Lo ideal es para instalar estas librerias es hacerlo con composer para aprovechar las caracteristicas de autodiscover.
+
+Pregunta de entrevista, que es autodiscover: es una funcionalidad que permite actualizar el autoload.php
+
+para instalarlo utilizaremos
+
+`$ sail composer require intervention/image` 
+
+
