@@ -12,10 +12,9 @@ const dropzone = new Dropzone('#dropzone',{
     uploadMultiple: false
 })
 
-dropzone.on('sending', function(file, xhr, formdata){
 
-})
 
 dropzone.on('success', function(file, response){
+    document.querySelector('[name="imagen"]').value = response.imagen
     
 })

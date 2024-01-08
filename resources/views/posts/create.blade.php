@@ -45,6 +45,14 @@
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="mb-5">
+                    <input type="hidden" name="imagen">
+                </div>
+                @error('imagen')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
+                @enderror
+
                 <input type="submit" value="Crear Publicación"
                     class="
                     bg-sky-600
