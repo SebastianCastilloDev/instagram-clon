@@ -397,3 +397,7 @@ para instalarlo utilizaremos
 `$ sail composer require intervention/image` 
 
 
+## Comentarios
+
+sail artisan make:model --migration --controller Comentario
+
