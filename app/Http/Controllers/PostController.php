@@ -23,6 +23,13 @@ class PostController extends Controller
     public function create(){
         return view('posts.create');
     }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'titulo' => 'required|max:255',
+            'descripcion' => 'required'
+        ]);
+    }
 }
 
 session_start();
