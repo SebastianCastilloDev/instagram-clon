@@ -374,3 +374,14 @@ Revisar la documentacion de auth en laravel
 Crearemos un controlador dedicado a manejar la ruta de subida de imágenes
 
 sail artisan make:controller ImagenController
+
+### Subir archivos que están cargados en memoria
+
+Dropzone tiene una serie de eventos que nos permitira manejar esta situación.
+Estos eventos se llaman:
+* sending
+* success
+* error
+* removedfile
+
+El evento de success nos va a retornar la respuesta de ImagenController.php
