@@ -424,3 +424,5 @@ para crear la columna de imagen ejecutaremos la siguiente migracion
 `sail artisan make:migration add_imagen_field_to_users_table`
 
 ## Funcionalidad de seguidores y siguiendo
+
+`sail artisan make:model Follower -mc`
