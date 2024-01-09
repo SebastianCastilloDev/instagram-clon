@@ -415,3 +415,6 @@ Finalmente ejecutamos nuevamente la migración
 
 crearemos una nueva migración, modelo, controller
 `sail artisan make:model --migration --controller Like`
+
+## Proteger la edicion de perfiles
+`sail artisan make:controller PerfilController`
