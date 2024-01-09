@@ -411,3 +411,7 @@ Desharemos la ultima migracion para actualizar la migracion que crea los comenta
 Finalmente ejecutamos nuevamente la migración
 `sail artisan migrate`
 
+## Likes
+
+crearemos una nueva migración, modelo, controller
+`sail artisan make:model --migration --controller Like`
