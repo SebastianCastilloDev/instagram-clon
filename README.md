@@ -363,7 +363,7 @@ User::create([
 
 ## Redireccionar
 
-        return redirect()->route('post.index');
+`return redirect()->route('post.index');`
 
 ## Autenticacion
 
@@ -373,7 +373,7 @@ Revisar la documentacion de auth en laravel
 
 Crearemos un controlador dedicado a manejar la ruta de subida de imágenes
 
-sail artisan make:controller ImagenController
+`sail artisan make:controller ImagenController`
 
 ### Subir archivos que están cargados en memoria
 
@@ -384,13 +384,13 @@ Estos eventos se llaman:
 * error
 * removedfile
 
-El evento de success nos va a retornar la respuesta de ImagenController.php
+El evento de success nos va a retornar la respuesta de `ImagenController.php`
 
 ### Utilizando intervention image
 
 Lo ideal es para instalar estas librerias es hacerlo con composer para aprovechar las caracteristicas de autodiscover.
 
-Pregunta de entrevista, que es autodiscover: es una funcionalidad que permite actualizar el autoload.php
+Pregunta de entrevista, que es autodiscover: es una funcionalidad que permite actualizar el `autoload.php`
 
 para instalarlo utilizaremos
 
@@ -399,5 +399,15 @@ para instalarlo utilizaremos
 
 ## Comentarios
 
-sail artisan make:model --migration --controller Comentario
+`sail artisan make:model --migration --controller Comentario`
+
+### Eliminando comentarios con un policy
+Este comando nos crea un policy y lo asocia al modelo `Post`
+
+`sail artisan make:policy PostPolicy --model=Post`
+
+Desharemos la ultima migracion para actualizar la migracion que crea los comentarios, ya que si una publicacion tiene comentarios, no se podrá eliminar, entonces incorporamos `onCascade('delete')` a nuestra migracion.
+`sail artisan migrate:rollback --step=1 `
+Finalmente ejecutamos nuevamente la migración
+`sail artisan migrate`
 
