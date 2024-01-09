@@ -41,19 +41,21 @@
                     {{ $user->posts->count() }}
                     <span class="font-normal"> Posts</span>
                 </p>
-                @auth()
-                    <form action="" method="POST">
-                        @csrf
-                        <input type="submit"
-                            class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
-                            value="Seguir">
-                    </form>
-                    <form action="" method="POST">
-                        @csrf
-                        <input type="submit"
-                            class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
-                            value="Dejar de seguir">
-                    </form>
+                @auth
+                    @if ($user->id !== auth()->user()->id)
+                        <form action="{{ route('users.follow', $user) }}" method="POST">
+                            @csrf
+                            <input type="submit"
+                                class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
+                                value="Seguir">
+                        </form>
+                        <form action="" method="POST">
+                            @csrf
+                            <input type="submit"
+                                class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
+                                value="Dejar de seguir">
+                        </form>
+                    @endif
                 @endauth
             </div>
         </div>
