@@ -418,3 +418,7 @@ crearemos una nueva migración, modelo, controller
 
 ## Proteger la edicion de perfiles
 `sail artisan make:controller PerfilController`
+
+## Edición de perfil
+para crear la columna de imagen ejecutaremos la siguiente migracion
+`sail artisan make:migration add_imagen_field_to_users_table`
