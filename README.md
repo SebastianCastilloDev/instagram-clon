@@ -426,3 +426,7 @@ para crear la columna de imagen ejecutaremos la siguiente migracion
 ## Funcionalidad de seguidores y siguiendo
 
 `sail artisan make:model Follower -mc`
+
+## Pagina Principal
+
+`sail artisan make:controller HomeController`

@@ -16,7 +16,7 @@
         <div class="container mx-auto flex justify-between items-center">
 
             <h1 class="text-3xl font-black">
-                SebStagram
+                <a href="{{ route('home') }}">SebStagram</a>
             </h1>
 
             @auth
