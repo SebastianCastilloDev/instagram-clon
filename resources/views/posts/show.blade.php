@@ -10,7 +10,8 @@
             <img src="{{ asset('uploads') . '/' . $post->imagen }}" alt="Imagen del post {{ $post->titulo }}">
 
             <div class="p-3 flex items-center gap-4">
-                <form action="">
+                <form action="{{ route('posts.likes.store', $post) }}" method="POST">
+                    @csrf
                     <div class="my-4">
                         <button type="submit">
 
