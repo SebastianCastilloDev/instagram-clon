@@ -49,8 +49,9 @@
                                 class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
                                 value="Seguir">
                         </form>
-                        <form action="" method="POST">
+                        <form action="{{ route('users.unfollow', $user) }}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <input type="submit"
                                 class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
                                 value="Dejar de seguir">
