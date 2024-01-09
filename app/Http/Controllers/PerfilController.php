@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PerfilController extends Controller
@@ -14,4 +15,15 @@ class PerfilController extends Controller
         return view('perfil.index');
     }
     
+    public function store(Request $request) {
+        
+        //Modificar el request
+        $request->request->add(['username' => Str::slug($request->username)]);
+
+        //not_in: permite crear una black list.
+        //in: permite crear una white list.
+        $this->validate($request, [
+            'username'=>'required|unique:users,username|min:3|max:20|not_in:twitter,editar-perfil'
+        ]);
+    }
 }
